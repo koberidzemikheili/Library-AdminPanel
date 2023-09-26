@@ -14,9 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Author::factory(10)->create(); 
-        Book::factory(20)->create(); 
+        {
+            $authors = Author::factory(10)->create();
+            $books = Book::factory(20)->create();
 
-      
+            foreach ($books as $book) {
+                $randomAuthors = $authors->random(rand(1, 3));
+                $book->authors()->attach($randomAuthors);
+            }
+
+
+        }
     }
 }

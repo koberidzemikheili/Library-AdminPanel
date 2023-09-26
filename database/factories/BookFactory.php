@@ -19,7 +19,7 @@ class BookFactory extends Factory
         return [
             'name' => $this->faker->sentence(4),
             'year' => $this->faker->year,
-            'status' => $this->faker->randomElement(['available', 'unavailable']),
+            'status' => $this->faker->boolean,
         ];
     }
 }

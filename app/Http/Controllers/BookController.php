@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookStoreRequest;
+use App\Http\Requests\BookUpdateRequest;
 use App\Models\Author;
 use App\Models\Book;
-use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -20,13 +21,10 @@ class BookController extends Controller
 }
 
 
-    public function store(Request $request)
+    public function store(BookStoreRequest $request)
 {
-    $book = Book::create([
-        'name' => $request->input('name'),
-        'year' => $request->input('year'),
-        'status' => $request->input('status'),
-    ]);
+    $validated = $request->validated();
+    $book = Book::create($validated);
 
     $authorNames = explode(',', $request->input('authors'));
 
@@ -35,7 +33,7 @@ class BookController extends Controller
         $book->authors()->attach($author->id);
     }
 
-    return redirect()->route('books.index')->with('success', 'Book added successfully');
+    return redirect()->route('books.index');
 }
 
 
@@ -45,13 +43,10 @@ class BookController extends Controller
     }
 
 
-    public function update(Request $request, Book $book)
+    public function update(BookUpdateRequest $request, Book $book)
     {
-        $book->update([
-            'name' => $request->input('name'),
-            'year' => $request->input('year'),
-            'status' => $request->input('status'),
-        ]);
+        $validated = $request->validated();
+        $book->update($validated);
     
         $authorNames = explode(',', $request->input('authors'));
     
@@ -62,7 +57,7 @@ class BookController extends Controller
             $book->authors()->attach($author->id);
         }
     
-        return redirect()->route('books.index')->with('success', 'Book updated successfully');
+        return redirect()->route('books.index');
     }
     
 

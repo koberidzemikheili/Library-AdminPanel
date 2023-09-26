@@ -12,12 +12,18 @@
                     <label for="name" class="block text-gray-700">Name:</label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}"
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 text-gray-900">
+                    @error('name')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-4">
                     <label for="year" class="block text-gray-700">Year:</label>
                     <input type="text" name="year" id="year" value="{{ old('year') }}"
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 text-gray-900">
+                    @error('year')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-4">
@@ -33,6 +39,9 @@
                     <label for="authors" class="block text-gray-700">Authors (Separated by comma):</label>
                     <input type="text" name="authors" id="authors" value="{{ old('authors') }}"
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 text-gray-900">
+                    @error('authors')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mt-6">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-slate-900 text-white py-10">
+    <div class="bg-slate-900 text-gray-100 py-10">
         <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
             <h1 class="text-2xl font-semibold mb-4">Add Book</h1>
 
@@ -46,7 +46,7 @@
 
                 <div class="mt-6">
                     <button type="submit"
-                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue active:bg-blue-700">
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-gray-100 font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue active:bg-blue-700">
                         Add Book
                     </button>
                 </div>

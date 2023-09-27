@@ -11,7 +11,7 @@
 
 <body>
 
-    <main class="bg-slate-900 text-white min-h-screen min-w-screen">
+    <main class="bg-slate-900 text-gray-100 min-h-screen min-w-screen">
         @yield('content')
     </main>
 

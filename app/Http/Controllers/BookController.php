@@ -6,14 +6,30 @@ use App\Http\Requests\BookStoreRequest;
 use App\Http\Requests\BookUpdateRequest;
 use App\Models\Author;
 use App\Models\Book;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index()
-    {
-        $books = Book::with('authors')->get();
-        return view('books.index', compact('books'));
-    }
+
+    public function index(Request $request)
+{
+    $query = $request->input('query');
+
+    $books = Book::with('authors')
+        ->when($query, function ($query) use ($request) {
+            $query->where(function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->input('query') . '%')
+                    ->orWhereHas('authors', function ($query) use ($request) {
+                        $query->where('name', 'like', '%' . $request->input('query') . '%');
+                    });
+            });
+        })
+        ->get();
+
+    return view('books.index', compact('books'));
+}
+
+
 
     public function create()
 {
@@ -64,6 +80,6 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        return redirect()->route('books.index')->with('success', 'Book deleted successfully');
+        return redirect()->route('books.index');
     }
 }

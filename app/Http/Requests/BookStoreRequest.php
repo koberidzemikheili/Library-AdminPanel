@@ -14,7 +14,7 @@ class BookStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:books,name',
             'year' => 'required|integer',
             'status' => 'required',
             'authors' => 'required|string|max:255',

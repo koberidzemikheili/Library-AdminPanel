@@ -30,7 +30,6 @@ class BookController extends Controller
 }
 
 
-
     public function create()
 {
     return view('books.create');
@@ -68,13 +67,19 @@ class BookController extends Controller
     
         $book->authors()->detach();
     
+        $newAuthorIds = [];
+    
         foreach ($authorNames as $authorName) {
             $author = Author::firstOrCreate(['name' => trim($authorName)]);
+            $newAuthorIds[] = $author->id;
+    
             $book->authors()->attach($author->id);
         }
+        Author::doesntHave('books')->delete();
     
         return redirect()->route('books.index');
     }
+    
     
 
     public function destroy(Book $book)

@@ -14,7 +14,7 @@ class BookUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:books,name,' . $this->book->id,
             'year' => 'required|integer',
             'status' => 'required',
             'authors' => 'required|string|max:255',
